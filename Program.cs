@@ -27,7 +27,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = false; 
+    options.RequireHttpsMetadata = false;
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -89,6 +89,8 @@ app.MapGet("/weatherforecast", () =>
     return "hello I am lazy today";
 });
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
