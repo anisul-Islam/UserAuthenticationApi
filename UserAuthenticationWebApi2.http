@@ -1,0 +1,41 @@
+@UserAuthenticationWebApi2_HostAddress = http://localhost:5136
+
+GET {{UserAuthenticationWebApi2_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+POST http://localhost:5136/api/auth/register
+Content-Type: application/json 
+
+{
+  "name": "alex3",
+  "email": "alex3@gmail.com",
+  "password": "123456"
+}
+
+###
+
+POST http://localhost:5136/api/auth/login
+Content-Type: application/json 
+
+{
+  "email": "alex2@gmail.com",
+  "password": "123456"
+}
+###
+
+POST http://localhost:5136/api/auth/login
+Content-Type: application/json 
+
+{
+  "email": "alex3@gmail.com",
+  "password": "123456"
+}
+
+
+###
+
+GET http://localhost:5136/api/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzc5ZGQxNy05MTFmLTRhYjctODZkZi1iMmZmYjcyNWU0OGYiLCJ1bmlxdWVfbmFtZSI6ImFsZXgzIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI3ODU4NjM1LCJleHAiOjE3Mjc4NTg5MzUsImlhdCI6MTcyNzg1ODYzNSwiaXNzIjoiTG9jYWxob3N0SXNzdWVyIiwiYXVkIjoiTG9jYWxob3N0QXVkaWVuY2UifQ.DWQlt6JIEb9SNWnZToCdd-XS5F-OivVP7eIeN_h05oY
+
