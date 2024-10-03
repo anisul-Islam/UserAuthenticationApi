@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -82,21 +83,37 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// /products 
+app.Use(async (context, next) =>
+{
+    var clientIp = context.Connection.RemoteIpAddress?.ToString();
+    var stopwatch = Stopwatch.StartNew();
+    Console.WriteLine($"[{DateTime.UtcNow}] [Request] " +
+                      $"{context.Request.Method} {context.Request.Path}{context.Request.QueryString} " +
+                      $"from {clientIp}");
+
+    await next.Invoke();
+    stopwatch.Stop();
+    Console.WriteLine($"Time Taken: {stopwatch.ElapsedMilliseconds}");
+});
 
 
-app.MapGet("/weatherforecast", () =>
+
+app.MapGet("/", () =>
 {
     return "hello I am lazy today";
 });
+
+app.MapGet("/products", () =>
+{
+    return "returned all the products";
+});
+
+
 
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
-// POST => /auth/register => UserName, Email, Password, Address, CreatedAt, Image, IsAdmin
-
-// POST => /auth/login => Email, Password
-
-// GET => /user/{id} Get User Profile
 

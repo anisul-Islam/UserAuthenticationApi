@@ -5,6 +5,14 @@ Accept: application/json
 
 ###
 
+GET http://localhost:5136/
+
+###
+
+GET http://localhost:5136/prducts
+
+###
+
 POST http://localhost:5136/api/auth/register
 Content-Type: application/json 
 
