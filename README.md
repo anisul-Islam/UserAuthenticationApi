@@ -13,10 +13,7 @@
       // Inline Middleware: You can define middleware directly in the Program.cs or Startup.cs file using lambda expressions.
       app.Use(async (context, next) =>
       {
-          // Generate a Correlation ID for the request
-          var correlationId = Guid.NewGuid().ToString();
-          context.Items["CorrelationId"] = correlationId;
-
+         
           // Get the client IP address
           var clientIp = context.Connection.RemoteIpAddress?.ToString();
 
@@ -24,7 +21,7 @@
           var stopwatch = Stopwatch.StartNew();
 
           // Log Request details
-          Console.WriteLine($"[{DateTime.UtcNow}] [Request] [CorrelationId: {correlationId}] " +
+          Console.WriteLine($"[{DateTime.UtcNow}] [Request] " +
                             $"{context.Request.Method} {context.Request.Path}{context.Request.QueryString} " +
                             $"from {clientIp}");
 
