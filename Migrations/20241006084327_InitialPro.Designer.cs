@@ -12,8 +12,8 @@ using UserAuthenticationWebApi2.Data;
 namespace UserAuthenticationWebApi2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241002065121_Initial")]
-    partial class Initial
+    [Migration("20241006084327_InitialPro")]
+    partial class InitialPro
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

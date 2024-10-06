@@ -9,10 +9,6 @@ GET http://localhost:5136/
 
 ###
 
-GET http://localhost:5136/prducts
-
-###
-
 POST http://localhost:5136/api/auth/register
 Content-Type: application/json 
 
@@ -28,7 +24,7 @@ POST http://localhost:5136/api/auth/login
 Content-Type: application/json 
 
 {
-  "email": "alex2@gmail.com",
+  "email": "alex3@gmail.com",
   "password": "123456"
 }
 ###
@@ -45,5 +41,5 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5136/api/users/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzc5ZGQxNy05MTFmLTRhYjctODZkZi1iMmZmYjcyNWU0OGYiLCJ1bmlxdWVfbmFtZSI6ImFsZXgzIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI3ODU4NjM1LCJleHAiOjE3Mjc4NTg5MzUsImlhdCI6MTcyNzg1ODYzNSwiaXNzIjoiTG9jYWxob3N0SXNzdWVyIiwiYXVkIjoiTG9jYWxob3N0QXVkaWVuY2UifQ.DWQlt6JIEb9SNWnZToCdd-XS5F-OivVP7eIeN_h05oY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzc5ZGQxNy05MTFmLTRhYjctODZkZi1iMmZmYjcyNWU0OGYiLCJ1bmlxdWVfbmFtZSI6ImFsZXgzIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI4MjAxODQ1LCJleHAiOjE3MjgyMDIxNDUsImlhdCI6MTcyODIwMTg0NSwiaXNzIjoiTG9jYWxob3N0SXNzdWVyIiwiYXVkIjoiTG9jYWxob3N0QXVkaWVuY2UifQ.1sAjDN52DyPmYHOfMuv3W8Bpiam4A7oPjXqqzy9FiCk
 

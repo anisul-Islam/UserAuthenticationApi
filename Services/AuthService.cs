@@ -27,6 +27,10 @@ namespace UserAuthenticationWebApi2.Services
             // Console.WriteLine($"JWT Key Length: {_configuration["Jwt:Key"].Length}");
             // Console.WriteLine($"JWT Issuer: {_configuration["Jwt:Issuer"]}");
             // Console.WriteLine($"JWT Audience: {_configuration["Jwt:Audience"]}");
+
+            // var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key") ?? throw new InvalidOperationException("JWT Key is missing in environment variables.");
+            // var jwtIssuer = Environment.GetEnvironmentVariable("Jwt__Issuer") ?? throw new InvalidOperationException("JWT Issuer is missing in environment variables.");
+            // var jwtAudience = Environment.GetEnvironmentVariable("Jwt__Audience") ?? throw new InvalidOperationException("JWT Audience is missing in environment variables.");
         }
 
         // Register the user
@@ -69,7 +73,7 @@ namespace UserAuthenticationWebApi2.Services
             var tokenHandler = new JwtSecurityTokenHandler(); // Handler responsible for creating and validating JWTs. It handles the token's lifecycle.
 
             // Convert the secret key from the configuration into a byte array.
-            var jwtKey = _configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key is missing in configuration.");
+            var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key") ?? throw new InvalidOperationException("JWT Key is missing in configuration.");
 
             var key = Encoding.ASCII.GetBytes(jwtKey);
 
@@ -93,8 +97,8 @@ namespace UserAuthenticationWebApi2.Services
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
 
                 // optional
-                Issuer = _configuration["Jwt:Issuer"], // "iss" (issuer) claim: The issuer of the token.
-                Audience = _configuration["Jwt:Audience"] // "aud" (audience) claim: Intended recipient of the token.
+                Issuer = Environment.GetEnvironmentVariable("Jwt__Issuer"), // "iss" (issuer) claim: The issuer of the token.
+                Audience = Environment.GetEnvironmentVariable("Jwt__Audience"), // "aud" (audience) claim: Intended recipient of the token.
             };
 
             // Create the token based on the descriptor.
