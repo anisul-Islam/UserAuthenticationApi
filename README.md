@@ -190,3 +190,71 @@ builder.Services.AddSwaggerGen(c =>
 
 1. **Render Account**: Sign up for a Render account at [render.com](https://render.com/).
 2. **GitHub Repository**: Ensure your .NET web API is pushed to a GitHub repository.
+
+#### Steps to Deploy a .NET Web API to Render
+
+##### 1. Prepare Your .NET Web API
+
+Ensure your .NET web API project is ready for deployment. Typically, this involves:
+
+- Having a `.csproj` file in the root directory of your project.
+- Ensuring the project builds and runs correctly locally.
+- Add a `Dockerfile` install Docker extension
+
+###### Example `Dockerfile`
+
+If you prefer using a Dockerfile for more control over the build process, here’s a basic example for a .NET web API:
+
+```dockerfile
+# Use the official .NET image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["YourProject.csproj", "./"]
+RUN dotnet restore "YourProject.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "YourProject.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "YourProject.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "YourProject.dll"]
+```
+
+Replace `YourProject.csproj` and `YourProject.dll` with the actual names of your project files.
+
+###### 2. Create a New Web Service on Render
+
+1. **Login to Render**: Go to [render.com](https://render.com/) and log in to your account.
+
+2. **Create New Web Service**:
+
+   - Click the `New` button in the Render dashboard.
+   - Select `Web Service`.
+
+3. **Connect to GitHub**:
+
+   - Connect your GitHub account to Render if you haven’t already.
+   - Select the repository containing your .NET web API.
+
+4. **Configure the Web Service**:
+
+   - **Name**: Enter a name for your service.
+   - **Branch**: Select the branch you want to deploy (e.g., `main`).
+   - **Build Command**: Render automatically detects .NET projects and usually sets this to `dotnet publish -c Release -o out`.
+   - **Start Command**: Render sets this to `dotnet yourapp.dll` (replace `yourapp.dll` with your project's DLL name, usually matching the project name).
+
+5. **Environment**: Select the environment type (e.g., `Standard`).
+
+6. **Region**: Select the deployment region.
+
+7. **Instance Type**: Choose the instance type based on your resource requirements.
+
+8. **Click `Create Web Service`**.
