@@ -74,8 +74,8 @@ builder.Services.AddSwaggerGen(c =>
 
 - scenario 1: A React App on http://localhost:5173 can make api calls to your backend.
 
-  - scenario 2: Your production front-end hosted at http://studywithanis.com can make api calls to your backend.
-  - scenario 3: A request comes from https://malicious-site.com. is trying to make api calls to your backend.
+- scenario 2: Your production front-end hosted at http://studywithanis.com can make api calls to your backend.
+- scenario 3: A request comes from https://malicious-site.com. is trying to make api calls to your backend.
 
   ```csharp
   // install this: dotnet add package Microsoft.AspNetCore.Cors
@@ -184,6 +184,8 @@ builder.Services.AddSwaggerGen(c =>
   dotnet ef database update
   ```
 
+mylovelydayinsda_12
+
 ## 5. Deploy Web API in Render
 
 ### Prerequisites
@@ -230,7 +232,7 @@ ENTRYPOINT ["dotnet", "YourProject.dll"]
 
 Replace `YourProject.csproj` and `YourProject.dll` with the actual names of your project files.
 
-###### 2. Create a New Web Service on Render
+##### 2. Create a New Web Service on Render
 
 1. **Login to Render**: Go to [render.com](https://render.com/) and log in to your account.
 
@@ -258,3 +260,7 @@ Replace `YourProject.csproj` and `YourProject.dll` with the actual names of your
 7. **Instance Type**: Choose the instance type based on your resource requirements.
 
 8. **Click `Create Web Service`**.
+
+##### 3. Access Your Application
+
+Once the deployment is complete, Render will provide you with a URL where your .NET web API is hosted. You can use this URL to access your API endpoints.

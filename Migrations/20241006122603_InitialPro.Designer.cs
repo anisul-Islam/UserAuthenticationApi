@@ -12,7 +12,7 @@ using UserAuthenticationWebApi2.Data;
 namespace UserAuthenticationWebApi2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241006084327_InitialPro")]
+    [Migration("20241006122603_InitialPro")]
     partial class InitialPro
     {
         /// <inheritdoc />

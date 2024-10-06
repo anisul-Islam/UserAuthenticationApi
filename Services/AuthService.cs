@@ -73,7 +73,7 @@ namespace UserAuthenticationWebApi2.Services
             var tokenHandler = new JwtSecurityTokenHandler(); // Handler responsible for creating and validating JWTs. It handles the token's lifecycle.
 
             // Convert the secret key from the configuration into a byte array.
-            var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key") ?? throw new InvalidOperationException("JWT Key is missing in configuration.");
+            var jwtKey = Environment.GetEnvironmentVariable("JWT__KEY") ?? throw new InvalidOperationException("JWT Key is missing in configuration.");
 
             var key = Encoding.ASCII.GetBytes(jwtKey);
 
@@ -97,8 +97,8 @@ namespace UserAuthenticationWebApi2.Services
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
 
                 // optional
-                Issuer = Environment.GetEnvironmentVariable("Jwt__Issuer"), // "iss" (issuer) claim: The issuer of the token.
-                Audience = Environment.GetEnvironmentVariable("Jwt__Audience"), // "aud" (audience) claim: Intended recipient of the token.
+                Issuer = Environment.GetEnvironmentVariable("JWT__ISSUER"), // "iss" (issuer) claim: The issuer of the token.
+                Audience = Environment.GetEnvironmentVariable("JWT__AUDIENCE"), // "aud" (audience) claim: Intended recipient of the token.
             };
 
             // Create the token based on the descriptor.

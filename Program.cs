@@ -7,29 +7,30 @@ using Microsoft.OpenApi.Models;
 using UserAuthenticationWebApi2.Data;
 using UserAuthenticationWebApi2.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 DotNetEnv.Env.Load();
-
-// Get the database connection string from environment variables
-var defaultConnection = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") ?? throw new InvalidOperationException("Default Connection is missing in environment variables.");
-
-Console.WriteLine($"---------{defaultConnection}--------------");
 
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(defaultConnection));
+
 
 // for jwt
 // Add services to the DI container.
 var Configuration = builder.Configuration; // Ensure this is accessible
-var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key") ?? throw new InvalidOperationException("JWT Key is missing in environment variables.");
-var jwtIssuer = Environment.GetEnvironmentVariable("Jwt__Issuer") ?? throw new InvalidOperationException("JWT Issuer is missing in environment variables.");
-var jwtAudience = Environment.GetEnvironmentVariable("Jwt__Audience") ?? throw new InvalidOperationException("JWT Audience is missing in environment variables.");
+
+var jwtKey = Environment.GetEnvironmentVariable("JWT__KEY") ?? throw new InvalidOperationException("JWT Key is missing in configuration.");
+var jwtIssuer = Environment.GetEnvironmentVariable("JWT__ISSUER") ?? throw new InvalidOperationException("JWT Issure is missing in configuration.");
+var jwtAudience = Environment.GetEnvironmentVariable("JWT__AUDIENCE") ?? throw new InvalidOperationException("JWT Audience is missing in configuration.");
+var databaseConnectionUrl = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(databaseConnectionUrl));
 
 
 var key = Encoding.ASCII.GetBytes(jwtKey);
